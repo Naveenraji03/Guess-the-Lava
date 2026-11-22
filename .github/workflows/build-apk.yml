@@ -1,0 +1,19 @@
+name: Build APK
+on: [workflow_dispatch, push]
+jobs:
+  apk:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build with Buildozer
+        uses: ArtemSBulgakov/buildozer-action@v1
+        id: bz
+        with:
+          command: buildozer android debug
+          buildozer_version: stable
+          repository_root: .
+          working_directory: guess_the_lava_python_complete/app
+      - uses: actions/upload-artifact@v4
+        with:
+          name: GuessTheLava-APK
+          path: ${{ steps.bz.outputs.filename }}
