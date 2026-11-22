@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Guess the Lava</title>
+<link rel="stylesheet" href="/static/style.css">
+<script src="https://cdn.jsdelivr.net/npm/socket.io-client@4.7.5/dist/socket.io.min.js"></script>
+</head>
+<body>
+<div class="shell">
+  <header><div class="logo">🔥</div><div><h1>GUESS THE LAVA</h1><p>Draw it. Guess it. Beat your friends.</p></div></header>
+  <main>
+    <section id="home" class="panel">
+      <h2>Ready to play?</h2><label>Your player name</label><input id="playerName" maxlength="18" placeholder="Enter your name">
+      <button id="createBtn" class="primary">＋ Create a group</button>
+      <div class="or">OR JOIN FRIENDS</div>
+      <label>Group code</label><input id="roomCode" maxlength="6" placeholder="6-character code" style="text-transform:uppercase">
+      <button id="joinBtn" class="secondary">Join group</button>
+      <p class="hint">Up to 11 players • Real-time drawing • Free to play</p>
+    </section>
+
+    <section id="game" class="hidden">
+      <div class="topline"><div><span class="muted">GROUP CODE</span><strong id="codeLabel" class="room-code"></strong></div><button id="shareBtn" class="secondary small">↗ Share invite</button></div>
+      <div class="game-grid">
+        <div class="main-col">
+          <div class="panel roundbar"><div><span class="muted">ROUND</span><strong id="roundNo">0</strong></div><div class="wordbox"><span id="wordLabel">Waiting for host…</span><small id="timer">Lobby</small></div></div>
+          <div class="canvas-wrap"><canvas id="board" width="900" height="520"></canvas></div>
+          <div id="tools" class="toolbar hidden">
+            <button class="color active" data-color="#111827" style="background:#111827"></button>
+            <button class="color" data-color="#ef4444" style="background:#ef4444"></button>
+            <button class="color" data-color="#2563eb" style="background:#2563eb"></button>
+            <button class="color" data-color="#16a34a" style="background:#16a34a"></button>
+            <button class="color" data-color="#f59e0b" style="background:#f59e0b"></button>
+            <button id="clearBtn" class="secondary small">Clear</button>
+          </div>
+          <div id="guessArea" class="guess-area hidden"><input id="guessInput" placeholder="Type your guess…"><button id="guessBtn" class="primary">Guess</button></div>
+          <div id="result" class="result hidden"></div>
+          <button id="startBtn" class="primary start hidden">Start game / next round</button>
+          <div class="hint rules">Correct guessers: <b>+11 points</b>. If nobody guesses before time runs out: <b>all players −11 points</b>.</div>
+        </div>
+        <aside class="panel players-panel"><div class="players-head"><h3>Players</h3><span id="playerCount">0/11</span></div><div id="players"></div></aside>
+      </div>
+    </section>
+  </main>
+  <div id="toast" class="toast hidden"></div>
+</div>
+<script src="/static/game.js"></script>
+</body></html>
